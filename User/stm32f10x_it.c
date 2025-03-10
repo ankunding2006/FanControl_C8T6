@@ -86,8 +86,6 @@ void PendSV_Handler(void)
  */
 void SysTick_Handler(void)
 {
-  /* 更新系统时间 */
-  ANGLE_CONTROL_TimeUpdate();
 }
 
 /**
@@ -120,7 +118,8 @@ void TIM4_IRQHandler(void)
   {
     /* 清除中断标志位 */
     TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
-                     // 例如：角度传感器数据采集或其他2ms周期任务
+    /* 更新系统时间 */
+    ANGLE_CONTROL_TimeUpdate();
   }
 }
 

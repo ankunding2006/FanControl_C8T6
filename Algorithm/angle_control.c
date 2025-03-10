@@ -10,6 +10,8 @@
 #include <math.h>
 #include <stdio.h>
 
+uint8_t speed;
+
 /* 控制参数默认值 */
 #define DEFAULT_KP 10.0f           // 默认比例系数
 #define DEFAULT_KI 0.5f            // 默认积分系数
@@ -237,7 +239,6 @@ void ANGLE_CONTROL_Process(AngleControl_TypeDef *control)
 static void ANGLE_CONTROL_ProcessSingleFan(AngleControl_TypeDef *control)
 {
     float pid_output;
-    uint8_t speed;
 
     /* 计算PID输出 */
     pid_output = PID_Calculate(&control->pid, control->current_angle);

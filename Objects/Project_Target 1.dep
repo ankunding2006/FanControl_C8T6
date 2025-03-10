@@ -749,7 +749,7 @@ I (.\Library\stm32f10x_usart.h)(0x67073482)
 I (.\Library\stm32f10x_wwdg.h)(0x67073484)
 I (.\Library\misc.h)(0x67073473)
 F (.\Library\stm32f10x_wwdg.h)(0x67073484)()
-F (.\User\main.c)(0x67CEC00F)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\User\main.c)(0x67CEE0FA)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\SYSTEM\sys\sys.h)(0x5822B9C0)
 I (.\Start\stm32f10x.h)(0x67073488)
 I (.\Start\core_cm3.h)(0x67073484)
@@ -792,7 +792,7 @@ I (.\Algorithm\angle_control.h)(0x67CD10AB)
 I (.\Algorithm\pid_controller.h)(0x67CC5231)
 I (C:\Users\34118\AppData\Local\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 F (.\User\stm32f10x_conf.h)(0x67073489)()
-F (.\User\stm32f10x_it.c)(0x67CEAB00)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)
+F (.\User\stm32f10x_it.c)(0x67CEE0FA)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)
 I (User\stm32f10x_it.h)(0x6707348A)
 I (User\stm32f10x.h)(0x5822B9C0)
 I (.\Start\core_cm3.h)(0x67073484)
@@ -828,7 +828,7 @@ I (.\Algorithm\pid_controller.h)(0x67CC5231)
 I (.\Hardware\fan_driver\fan_driver.h)(0x67CC4BAB)
 I (.\Hardware\angle_sensor\angle_sensor.h)(0x67CD6758)
 F (.\User\stm32f10x_it.h)(0x6707348A)()
-F (.\Hardware\angle_sensor\angle_sensor.c)(0x67CE7315)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\angle_sensor.o --omf_browse .\objects\angle_sensor.crf --depend .\objects\angle_sensor.d)
+F (.\Hardware\angle_sensor\angle_sensor.c)(0x67CEE6EF)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\angle_sensor.o --omf_browse .\objects\angle_sensor.crf --depend .\objects\angle_sensor.d)
 I (Hardware\angle_sensor\angle_sensor.h)(0x67CD6758)
 I (.\Start\stm32f10x.h)(0x67073488)
 I (.\Start\core_cm3.h)(0x67073484)
@@ -962,7 +962,7 @@ I (C:\Users\34118\AppData\Local\Keil_v5\ARM\ARMCC\include\math.h)(0x5E8E3CC2)
 I (C:\Users\34118\AppData\Local\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (Hardware\OLED\oledfont.h)(0x5E14019B)
 I (.\SYSTEM\delay\delay.h)(0x5822B9C0)
-F (.\Algorithm\angle_control.c)(0x67CE7315)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\angle_control.o --omf_browse .\objects\angle_control.crf --depend .\objects\angle_control.d)
+F (.\Algorithm\angle_control.c)(0x67CEE50B)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\angle_control.o --omf_browse .\objects\angle_control.crf --depend .\objects\angle_control.d)
 I (Algorithm\angle_control.h)(0x67CD10AB)
 I (.\Start\stm32f10x.h)(0x67073488)
 I (.\Start\core_cm3.h)(0x67073484)
@@ -1030,7 +1030,7 @@ I (.\Library\stm32f10x_usart.h)(0x67073482)
 I (.\Library\stm32f10x_wwdg.h)(0x67073484)
 I (.\Library\misc.h)(0x67073473)
 I (C:\Users\34118\AppData\Local\Keil_v5\ARM\ARMCC\include\math.h)(0x5E8E3CC2)
-F (.\SYSTEM\delay\delay.c)(0x5822B9C0)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
+F (.\SYSTEM\delay\delay.c)(0x67CEE0FA)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\Algorithm -I .\Hardware\angle_sensor -I .\Hardware\fan_driver -I .\Hardware\KEY -I .\Hardware\OLED -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart-IC:\Users\34118\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
 I (SYSTEM\delay\delay.h)(0x5822B9C0)
 I (.\SYSTEM\sys\sys.h)(0x5822B9C0)
 I (.\Start\stm32f10x.h)(0x67073488)

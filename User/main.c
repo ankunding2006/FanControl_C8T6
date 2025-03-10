@@ -54,13 +54,6 @@ static void ConfigureControlMode(WorkMode_TypeDef mode);
 void DisplayStatus(void);
 void ShowBootAnimation(void);
 
-/*
- * @brief
- *
- * @brief  系统初始化函数
- * @param  无
- * @retval 无
- */
 /**
  * @brief  系统初始化函数
  * @param  无
@@ -131,8 +124,8 @@ static void Timer_Init(void)
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
 
-    // TIM4配置 - 2ms中断
-    TIM_TimeBaseStructure.TIM_Period = 1999;
+    // TIM4配置 - 1ms中断
+    TIM_TimeBaseStructure.TIM_Period = 999;
     TIM_TimeBaseStructure.TIM_Prescaler = 71; // 明确指定预分频值
     TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
 
@@ -185,7 +178,10 @@ int main(void)
     {
 
         UserInterface_Process(); // 用户交互处理
-        // printf("Angle: %.2f\r\n", ANGLE_SENSOR_GetAngle());
+        if (g_systemState == STATE_RUNNING)
+        {
+            printf("Angle: %.2f\r\n", ANGLE_SENSOR_GetAngle());
+        }
         DisplayStatus(); // 显示状态更新
     }
 }
@@ -353,122 +349,192 @@ void DisplayStatus(void)
     uint32_t elapsed = 0;
     uint8_t needUpdate = 0;
     uint8_t i;
-    
+
     // 首次运行强制更新
-    if (first_run) {
+    if (first_run)
+    {
         first_run = 0;
         needUpdate = 1;
-        printf("First display update\r\n");
     }
-    
+
     // 别的状态强制更新 - 这是关键，确保状态变化时立即更新显示
-    if (g_systemState != g_lastSystemState || g_workMode != g_lastWorkMode) {
+    if (g_systemState != g_lastSystemState || g_workMode != g_lastWorkMode)
+    {
         needUpdate = 1;
-        printf("State changed: %d -> %d, mode: %d -> %d\r\n", 
-               g_lastSystemState, g_systemState,
-               g_lastWorkMode, g_workMode);
     }
-    
+
+    // 检查目标角度变化 (在所有状态下) - 这是修复的关键点
+    if (fabs(g_targetAngle - g_lastTargetAngle) > 0.2f)
+    {
+        needUpdate = 1;
+    }
+
     // 限制刷新频率 - 只有不需要更新时才返回
-    if (current_time - last_display_time < 100 && !needUpdate) {
+    if (current_time - last_display_time < 100 && !needUpdate)
+    {
         return;
     }
-    
+
     // 清空临时缓冲区
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++)
+    {
         memset(buf[i], 0, sizeof(buf[i]));
     }
-    
-    // 检查角度变化 (仅在运行状态)
-    if (g_systemState == STATE_RUNNING) {
-        if (fabs(current_angle - g_lastCurrentAngle) > 0.5f || 
-            fabs(g_targetAngle - g_lastTargetAngle) > 0.2f) {
+
+    // 检查当前角度变化 (仅在运行状态)
+    if (g_systemState == STATE_RUNNING)
+    {
+        if (fabs(current_angle - g_lastCurrentAngle) > 0.5f)
+        {
             needUpdate = 1;
         }
     }
-    
+
     // 根据系统状态生成显示内容
-    switch (g_systemState) {
-        case STATE_MENU:
-            // 标题栏
-            strcpy(buf[0], "< Mode Selection >");
-            
-            // 当前选中的模式，使用指针标记
-            switch (g_workMode) {
-                case MODE_IDLE:
-                    strcpy(buf[1], "> Idle Mode");
-                    strcpy(buf[2], "  Single Fan 45");
-                    break;
-                case MODE_SINGLE_FAN_45DEG:
-                    strcpy(buf[1], "  Idle Mode");
-                    strcpy(buf[2], "> Single Fan 45");
-                    break;
-                case MODE_SINGLE_FAN_ANY:
-                    strcpy(buf[1], "> Single Fan Any");
-                    strcpy(buf[2], "  Dual Fan Any");
-                    break;
-                case MODE_DUAL_FAN_ANY:
-                    strcpy(buf[1], "  Single Fan Any");
-                    strcpy(buf[2], "> Dual Fan Any");
-                    break;
-                case MODE_DUAL_FAN_SEQUENCE:
-                    strcpy(buf[1], "> Sequence Mode");
-                    strcpy(buf[2], "  Idle Mode");
-                    break;
+    switch (g_systemState)
+    {
+    case STATE_MENU:
+        // 标题栏
+        strcpy(buf[0], "< Mode Selection >");
+
+        // 当前选中的模式，使用指针标记
+        switch (g_workMode)
+        {
+        case MODE_IDLE:
+            strcpy(buf[1], "> Idle Mode");
+            strcpy(buf[2], "  Single Fan 45");
+            break;
+        case MODE_SINGLE_FAN_45DEG:
+            strcpy(buf[1], "  Idle Mode");
+            strcpy(buf[2], "> Single Fan 45");
+            break;
+        case MODE_SINGLE_FAN_ANY:
+            strcpy(buf[1], "> Single Fan Any");
+            strcpy(buf[2], "  Dual Fan Any");
+            break;
+        case MODE_DUAL_FAN_ANY:
+            strcpy(buf[1], "  Single Fan Any");
+            strcpy(buf[2], "> Dual Fan Any");
+            break;
+        case MODE_DUAL_FAN_SEQUENCE:
+            strcpy(buf[1], "> Sequence Mode");
+            strcpy(buf[2], "  Idle Mode");
+            break;
+        }
+
+        // 底部提示
+        strcpy(buf[3], "UP/DN:Sel ENTER:OK");
+        break;
+
+    case STATE_ANGLE_SETTING:
+        strcpy(buf[0], "< Angle Setting >");
+        sprintf(buf[1], "Target: %.1f deg", g_targetAngle);
+        sprintf(buf[2], "Current: %.1f deg", current_angle);
+        strcpy(buf[3], "UP/DN:+- ENTER:OK");
+        break;
+
+    case STATE_RUNNING:
+        // 显示运行状态
+        switch (g_workMode)
+        {
+        case MODE_SINGLE_FAN_45DEG:
+            strcpy(buf[0], "< Single Fan 45 >");
+            break;
+        case MODE_SINGLE_FAN_ANY:
+            strcpy(buf[0], "< Single Fan >");
+            break;
+        case MODE_DUAL_FAN_ANY:
+            strcpy(buf[0], "< Dual Fan >");
+            break;
+        case MODE_DUAL_FAN_SEQUENCE:
+            strcpy(buf[0], "< Sequence Mode >");
+            break;
+        default:
+            strcpy(buf[0], "< Running >");
+            break;
+        }
+
+        // 显示角度信息
+        sprintf(buf[1], "Target: %.1f deg", g_targetAngle);
+        sprintf(buf[2], "Current: %.1f deg", current_angle);
+
+        // 模式特定信息
+        if (g_workMode == MODE_SINGLE_FAN_45DEG)
+        {
+            elapsed = (current_time - g_modeStartTime) / 1000;
+            if (elapsed <= 10)
+            {
+                sprintf(buf[3], "Time: %ds/10s", (int)elapsed);
+                if (elapsed != g_lastElapsedTime)
+                {
+                    needUpdate = 1;
+                }
             }
-            
-            // 底部提示
-            strcpy(buf[3], "UP/DN:Sel ENTER:OK");
-            break;
-            
-        // 其他状态代码保持不变
-        case STATE_ANGLE_SETTING:
-            strcpy(buf[0], "< Angle Setting >");
-            sprintf(buf[1], "Target: %.1f deg", g_targetAngle);
-            sprintf(buf[2], "Current: %.1f deg", current_angle);
-            strcpy(buf[3], "UP/DN:+- ENTER:OK");
-            break;
-            
-        case STATE_RUNNING:
-            // 运行状态代码...
-            // [保持原有逻辑，省略]
-            break;
+            else
+            {
+                strcpy(buf[3], "Time: Complete");
+            }
+        }
+        else if (g_workMode == MODE_DUAL_FAN_SEQUENCE)
+        {
+            // 序列模式特殊信息显示
+            sprintf(buf[3], "Step: %d/5", g_angle_control.sequence.current_index + 1);
+        }
+        else
+        {
+            strcpy(buf[3], "MODE:Back");
+        }
+        break;
+
+    default:
+        strcpy(buf[0], "< System Error >");
+        strcpy(buf[1], "Unknown state");
+        sprintf(buf[2], "State: %d", g_systemState);
+        strcpy(buf[3], "Press MODE to reset");
+        break;
     }
-    
+
     // 检查缓冲区内容是否变化
-    if (!needUpdate) {
-        for (i = 0; i < 4; i++) {
-            if (strcmp(buf[i], g_lastDisplayBuf[i]) != 0) {
+    if (!needUpdate)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            if (strcmp(buf[i], g_lastDisplayBuf[i]) != 0)
+            {
                 needUpdate = 1;
                 break;
             }
         }
     }
-    
+
     // 更新显示
-    if (needUpdate) {
+    if (needUpdate)
+    {
         OLED_Clear();
-        
+
         // 显示生成的内容
-        for (i = 0; i < 4; i++) {
-            if (buf[i][0] != '\0') {
+        for (i = 0; i < 4; i++)
+        {
+            if (buf[i][0] != '\0')
+            {
                 OLED_ShowString(0, i * 16, (u8 *)buf[i], 12, 1);
             }
         }
-        
+
         // 保存当前显示内容
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < 4; i++)
+        {
             strncpy(g_lastDisplayBuf[i], buf[i], 20);
             g_lastDisplayBuf[i][20] = '\0';
         }
-        
+
         // 更新状态变量
         g_lastSystemState = g_systemState;
         g_lastWorkMode = g_workMode;
         g_lastCurrentAngle = current_angle;
-        g_lastTargetAngle = g_targetAngle;
+        g_lastTargetAngle = g_targetAngle; // 确保更新目标角度记录值
         g_lastElapsedTime = elapsed;
-        
+
         // 刷新显示
         OLED_Refresh();
         last_display_time = current_time;

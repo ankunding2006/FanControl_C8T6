@@ -143,7 +143,8 @@ void delay_init()
 	SysTick->CTRL|=SysTick_CTRL_ENABLE_Msk;   	//开启SYSTICK    
 
 #else
-	fac_ms=(u16)fac_us*1000;					//非OS下,代表每个ms需要的systick时钟数   
+	fac_ms=(u16)fac_us*1000;					//非OS下,代表每个ms需要的systick时钟数
+	   
 #endif
 }								    
 

@@ -86,5 +86,5 @@ float ANGLE_SENSOR_GetAngle(void)
     if (fabs(actual_angle) < 0.5f)
         actual_angle = 0.0f;
 
-    return actual_angle * 1.5;
+    return actual_angle * 1.5 + 90;
 }
