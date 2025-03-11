@@ -146,68 +146,25 @@ static float PID_CalculatePosition(PID_TypeDef *pid, float nextPoint)
   */
 static float PID_CalculateIncremental(PID_TypeDef *pid, float nextPoint)
 {
-    float error, deltaP, deltaI, deltaD;
-    float deltaOutput;
+    float error = pid->setPoint - nextPoint;
     
-    /* 更新当前过程值 */
-    pid->processValue = nextPoint;
+    // 正确应用采样时间
+    float deltaP = pid->Kp * (error - pid->lastError);
+    float deltaI = pid->Ki * error ;  // 积分项乘以采样时间
+    float deltaD = pid->Kd * (error - 2*pid->lastError + pid->prevError) / pid->sampleTime;  // 微分项除以采样时间
     
-    /* 计算当前误差 */
-    error = pid->setPoint - nextPoint;
-    
-    /* 死区处理 */
-    if (fabs(error) <= pid->deadBand) {
-        error = 0.0f;
-    }
-    
-    /* 计算比例项增量 */
-    deltaP = pid->Kp * (error - pid->lastError);
-    
-    /* 计算积分项增量 */
-    if (pid->enableIntegral) {
-        /* 积分分离 */
-        if (!pid->integralSeparation || fabs(error) < pid->integralSeparationThreshold) {
-            deltaI = pid->Ki * error;
-        } else {
-            deltaI = 0.0f;
-        }
-    } else {
-        deltaI = 0.0f;
-    }
-    
-    /* 计算微分项增量 */
-    if (pid->enableDerivative) {
-        if (pid->enableLPF) {
-            /* 带低通滤波的微分项计算 */
-            deltaD = pid->Kd * pid->differentiatorLPF * (error - 2 * pid->lastError + pid->prevError);
-        } else {
-            /* 标准微分项计算 */
-            deltaD = pid->Kd * (error - 2 * pid->lastError + pid->prevError);
-        }
-    } else {
-        deltaD = 0.0f;
-    }
-    
-    /* 计算输出增量 */
-    deltaOutput = deltaP + deltaI + deltaD;
-    
-    /* 更新输出 */
-    pid->output += deltaOutput;
-    
-    /* 输出限幅 */
-    if (pid->output > pid->outputMax) {
-        pid->output = pid->outputMax;
-    } else if (pid->output < pid->outputMin) {
-        pid->output = pid->outputMin;
-    }
-    
-    /* 保存状态 */
     pid->prevError = pid->lastError;
     pid->lastError = error;
     
+    float deltaOutput = deltaP + deltaI + deltaD;
+    pid->output += deltaOutput;
+    
+    // 输出限幅
+    if(pid->output > pid->outputMax) pid->output = pid->outputMax;
+    if(pid->output < pid->outputMin) pid->output = pid->outputMin;
+    
     return pid->output;
 }
-
 /**
   * @brief  计算PID输出
   * @param  pid: 指向PID结构体的指针

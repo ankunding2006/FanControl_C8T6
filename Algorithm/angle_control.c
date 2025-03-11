@@ -26,6 +26,7 @@ uint8_t speed;
 
 /* 私有变量 */
 static volatile uint32_t g_system_time = 0; // 系统时间，由SysTick中断更新
+extern float g_targetAngle;
 
 /* 私有函数声明 */
 static void ANGLE_CONTROL_UpdateTime(AngleControl_TypeDef *control);
@@ -78,10 +79,10 @@ void ANGLE_CONTROL_Init(AngleControl_TypeDef *control, ControlMode_TypeDef mode)
 void ANGLE_CONTROL_SetTarget(AngleControl_TypeDef *control, float angle)
 {
     /* 限制角度范围 */
-    if (angle > 90.0f)
-        angle = 90.0f;
-    if (angle < -90.0f)
-        angle = -90.0f;
+    if (angle > 180.0f)
+        angle = 180.0f;
+    if (angle < 0.0f)
+        angle = 0.0f;
 
     /* 更新目标角度 */
     control->target_angle = angle;
@@ -245,27 +246,14 @@ static void ANGLE_CONTROL_ProcessSingleFan(AngleControl_TypeDef *control)
 
     /*
      * 单风扇控制逻辑：
-     * 1. 当需要正角度时(顺时针)，使用右风扇
-     * 2. 当需要负角度时(逆时针)，使用左风扇
+     * 1. 当目标角度小于90度时(右侧)，使用左风扇推向右侧
+     * 2. 当目标角度大于90度时(左侧)，使用右风扇推向左侧
      */
 
     /* 根据目标角度决定使用哪个风扇 */
-    if (control->target_angle >= 0.0f)
+    if (control->target_angle <= 90.0f)
     {
-        /* 目标角度为正，使用右风扇 */
-        speed = (uint8_t)(fabs(pid_output));
-        if (speed > 100)
-            speed = 100;
-
-        FAN_SetSpeed(FAN_RIGHT, speed);
-        FAN_SetSpeed(FAN_LEFT, 0);
-
-        /* 设置风扇方向 */
-        FAN_SetDirection(FAN_RIGHT, FAN_DIR_FORWARD);
-    }
-    else
-    {
-        /* 目标角度为负，使用左风扇 */
+        /* 目标角度在右侧，使用左风扇 */
         speed = (uint8_t)(fabs(pid_output));
         if (speed > 100)
             speed = 100;
@@ -275,6 +263,21 @@ static void ANGLE_CONTROL_ProcessSingleFan(AngleControl_TypeDef *control)
 
         /* 设置风扇方向 */
         FAN_SetDirection(FAN_LEFT, FAN_DIR_FORWARD);
+        //打印左右风扇的速度
+        printf("left speed:%d,right speed:%d\r\n", speed, 0);
+    }
+    else
+    {
+        /* 目标角度在左侧，使用右风扇 */
+        speed = (uint8_t)(fabs(pid_output));
+        if (speed > 100)
+            speed = 100;
+
+        FAN_SetSpeed(FAN_RIGHT, speed);
+        FAN_SetSpeed(FAN_LEFT, 0);
+
+        /* 设置风扇方向 */
+        FAN_SetDirection(FAN_RIGHT, FAN_DIR_FORWARD);
     }
 }
 
@@ -358,7 +361,7 @@ static void ANGLE_CONTROL_ProcessSequence(AngleControl_TypeDef *control)
     /* 获取当前目标角度和保持时间 */
     current_target = control->sequence.angles[control->sequence.current_index];
     hold_time = control->sequence.hold_times[control->sequence.current_index];
-
+    g_targetAngle = current_target;
     /* 检查当前角度是否已达到目标 */
     if (control->state == ANGLE_STATE_STABLE)
     {

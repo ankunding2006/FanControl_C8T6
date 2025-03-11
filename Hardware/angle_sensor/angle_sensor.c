@@ -48,7 +48,7 @@ AngleSensorStatus_TypeDef ANGLE_SENSOR_Init(void)
 }
 
 /**
- * @brief  获取角度值
+ * @brief  获取角度值,在最右侧水平位置时返回0度,在最左侧水平位置时返回180度,在垂直向上时返回90度
  * @retval float: 当前角度值(度)
  */
 float ANGLE_SENSOR_GetAngle(void)

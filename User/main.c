@@ -33,7 +33,7 @@ typedef enum
 AngleControl_TypeDef g_angle_control;     // 角度控制结构体
 static SystemState_TypeDef g_systemState; // 系统状态
 static WorkMode_TypeDef g_workMode;       // 工作模式
-static float g_targetAngle = 0.0f;        // 目标角度
+float g_targetAngle = 0.0f;        // 目标角度
 static uint32_t g_modeStartTime = 0;      // 模式开始时间
 
 /* 显示缓冲区，用于存储上一次显示的内容 */
@@ -53,6 +53,7 @@ static void MenuManager(void);
 static void ConfigureControlMode(WorkMode_TypeDef mode);
 void DisplayStatus(void);
 void ShowBootAnimation(void);
+void Test_PWM(void);
 
 /**
  * @brief  系统初始化函数
@@ -78,7 +79,7 @@ static void System_Init(void)
     ANGLE_CONTROL_Init(&g_angle_control, CONTROL_MODE_IDLE);
 
     // PID参数初始化 - 为角度控制器配置适当的参数
-    PID_Init(&(g_angle_control.pid), 2.0f, 0.05f, 1.0f, PID_MODE_POSITION, 0.01f);
+    PID_Init(&(g_angle_control.pid), 2.3f, 0.02f, 0.00f, PID_MODE_INCREMENTAL, 0.01f);
 
     // 初始化定时器
     Timer_Init();
@@ -166,7 +167,7 @@ int main(void)
     OLED_DisplayTurn(0); // 0正常显示 1 屏幕翻转显示
 
     // 播放开机动画
-    ShowBootAnimation();
+    // ShowBootAnimation();
     OLED_Clear();
     OLED_ShowString(0, 0, (u8 *)"Wind Panel Control", 12, 1); // 显示欢迎信息
     OLED_ShowString(0, 12, (u8 *)"System Ready", 12, 1);
@@ -178,10 +179,6 @@ int main(void)
     {
 
         UserInterface_Process(); // 用户交互处理
-        if (g_systemState == STATE_RUNNING)
-        {
-            printf("Angle: %.2f\r\n", ANGLE_SENSOR_GetAngle());
-        }
         DisplayStatus(); // 显示状态更新
     }
 }
@@ -253,8 +250,8 @@ static void ProcessKeys(void)
         if (key == KEY_UP)
         {
             g_targetAngle += 5.0f;
-            if (g_workMode == MODE_SINGLE_FAN_ANY && g_targetAngle > 90.0f)
-                g_targetAngle = 90.0f;
+            if (g_workMode == MODE_SINGLE_FAN_ANY && g_targetAngle > 180.0f)
+                g_targetAngle = 180.0f;
             else if (g_workMode == MODE_DUAL_FAN_ANY && g_targetAngle > 180.0f)
                 g_targetAngle = 180.0f;
         }
@@ -551,4 +548,42 @@ static void MenuManager(void)
     // 根据系统状态管理菜单
     // 此处可以添加菜单管理逻辑
     return;
+}
+
+void Test_PWM(void)
+{
+    // 1. 配置GPIO
+    GPIO_InitTypeDef GPIO_InitStructure;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1; // 只测试一个通道
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    // 2. 配置定时器
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    TIM_OCInitTypeDef TIM_OCInitStructure;
+
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+    TIM_TimeBaseStructure.TIM_Period = 999;       // 1kHz PWM频率
+    TIM_TimeBaseStructure.TIM_Prescaler = 72 - 1; // 72MHz/72=1MHz
+    TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+
+    // 3. 配置PWM
+    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+    TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+    TIM_OCInitStructure.TIM_Pulse = 500; // 50%占空比
+    TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+
+    TIM_OC2Init(TIM2, &TIM_OCInitStructure);
+    TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable);
+
+    TIM_ARRPreloadConfig(TIM2, ENABLE);
+    TIM_Cmd(TIM2, ENABLE);
+
+    printf("PWM Test started on PA1\r\n");
 }

@@ -23,7 +23,7 @@ typedef enum {
 } FanSelect_TypeDef;
 
 /* 风扇控制相关宏定义 */
-#define FAN_PWM_FREQ         1000                  // PWM频率 (Hz)
+#define FAN_PWM_FREQ         2000                  // PWM频率 (Hz)
 #define FAN_MAX_DUTY         100                   // PWM最大占空比 (%)
 #define FAN_PWM_PERIOD       (SystemCoreClock/FAN_PWM_FREQ) // PWM周期
 
