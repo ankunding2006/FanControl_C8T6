@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Mar 11 20:38:22 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Mar 11 20:49:47 2025
 <BR><P>
 <H3>Maximum Stack Usage =        324 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -394,11 +394,12 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessSingleFan
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessSequence
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Stop
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetStableCondition
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Stop
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetStableCondition
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Init
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ConfigSequence
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -672,11 +673,11 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_SENSOR_Init
 </UL>
 
-<P><STRONG><a name="[96]"></a>ADC_GetConversionValue</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_GetConversionValue))
+<P><STRONG><a name="[97]"></a>ADC_GetConversionValue</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_GetConversionValue))
 <BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_SENSOR_GetAngle
 </UL>
 
-<P><STRONG><a name="[95]"></a>ADC_GetFlagStatus</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_GetFlagStatus))
+<P><STRONG><a name="[96]"></a>ADC_GetFlagStatus</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_GetFlagStatus))
 <BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_SENSOR_GetAngle
 </UL>
 
@@ -736,8 +737,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[7c]"></a>ANGLE_CONTROL_Process</STRONG> (Thumb, 208 bytes, Stack size 24 bytes, angle_control.o(i.ANGLE_CONTROL_Process))
-<BR><BR>[Stack]<UL><LI>Max Depth = 224 + Unknown Stack Size
-<LI>Call Chain = ANGLE_CONTROL_Process &rArr; ANGLE_CONTROL_ProcessSequence &rArr; ANGLE_CONTROL_SetTarget &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 248 + Unknown Stack Size
+<LI>Call Chain = ANGLE_CONTROL_Process &rArr; ANGLE_CONTROL_ProcessSequence &rArr; ANGLE_CONTROL_ProcessDualFan &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_UpdateTime
@@ -754,19 +755,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[8d]"></a>ANGLE_CONTROL_SetMode</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, angle_control.o(i.ANGLE_CONTROL_SetMode))
+<P><STRONG><a name="[8f]"></a>ANGLE_CONTROL_SetMode</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, angle_control.o(i.ANGLE_CONTROL_SetMode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
 <LI>Call Chain = ANGLE_CONTROL_SetMode &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Reset
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Reset
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_StopAll
 </UL>
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessSequence
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ConfigureControlMode
 </UL>
 
-<P><STRONG><a name="[91]"></a>ANGLE_CONTROL_SetStableCondition</STRONG> (Thumb, 42 bytes, Stack size 32 bytes, angle_control.o(i.ANGLE_CONTROL_SetStableCondition))
+<P><STRONG><a name="[93]"></a>ANGLE_CONTROL_SetStableCondition</STRONG> (Thumb, 42 bytes, Stack size 32 bytes, angle_control.o(i.ANGLE_CONTROL_SetStableCondition))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = ANGLE_CONTROL_SetStableCondition &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -776,13 +777,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ConfigureControlMode
 </UL>
 
-<P><STRONG><a name="[8e]"></a>ANGLE_CONTROL_SetTarget</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, angle_control.o(i.ANGLE_CONTROL_SetTarget))
+<P><STRONG><a name="[90]"></a>ANGLE_CONTROL_SetTarget</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, angle_control.o(i.ANGLE_CONTROL_SetTarget))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
 <LI>Call Chain = ANGLE_CONTROL_SetTarget &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_SetPoint
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_SetPoint
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 </UL>
@@ -791,12 +792,12 @@ Global Symbols
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ConfigureControlMode
 </UL>
 
-<P><STRONG><a name="[94]"></a>ANGLE_CONTROL_Stop</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, angle_control.o(i.ANGLE_CONTROL_Stop))
+<P><STRONG><a name="[95]"></a>ANGLE_CONTROL_Stop</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, angle_control.o(i.ANGLE_CONTROL_Stop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = ANGLE_CONTROL_Stop &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Reset
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Reset
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_StopAll
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessKeys
@@ -809,16 +810,16 @@ Global Symbols
 <P><STRONG><a name="[7e]"></a>ANGLE_SENSOR_GetAngle</STRONG> (Thumb, 210 bytes, Stack size 40 bytes, angle_sensor.o(i.ANGLE_SENSOR_GetAngle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = ANGLE_SENSOR_GetAngle &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetConversionValue
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetConversionValue
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 </UL>
@@ -882,7 +883,7 @@ Global Symbols
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_Init
 </UL>
 
-<P><STRONG><a name="[8c]"></a>FAN_SetDirection</STRONG> (Thumb, 78 bytes, Stack size 32 bytes, fan_driver.o(i.FAN_SetDirection))
+<P><STRONG><a name="[88]"></a>FAN_SetDirection</STRONG> (Thumb, 78 bytes, Stack size 32 bytes, fan_driver.o(i.FAN_SetDirection))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = FAN_SetDirection
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
@@ -892,7 +893,7 @@ Global Symbols
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
 </UL>
 
-<P><STRONG><a name="[8b]"></a>FAN_SetSpeed</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, fan_driver.o(i.FAN_SetSpeed))
+<P><STRONG><a name="[87]"></a>FAN_SetSpeed</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, fan_driver.o(i.FAN_SetSpeed))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = FAN_SetSpeed
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetCompare3
@@ -919,8 +920,8 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_Init
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Stop
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Stop
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Init
 </UL>
 
@@ -944,7 +945,7 @@ Global Symbols
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_Stop
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_Start
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_Stop
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetDirection
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetDirection
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_Init
 </UL>
 
@@ -953,7 +954,7 @@ Global Symbols
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_WaitAck
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_Stop
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_Start
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetDirection
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetDirection
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_GPIO_Config
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_Init
 </UL>
@@ -1142,7 +1143,7 @@ Global Symbols
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_ColorTurn
 </UL>
 
-<P><STRONG><a name="[86]"></a>PID_Calculate</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, pid_controller.o(i.PID_Calculate))
+<P><STRONG><a name="[8a]"></a>PID_Calculate</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, pid_controller.o(i.PID_Calculate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = PID_Calculate &rArr; PID_CalculatePosition &rArr; __aeabi_cdcmple
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculatePosition
@@ -1159,22 +1160,22 @@ Global Symbols
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_Init
 </UL>
 
-<P><STRONG><a name="[90]"></a>PID_Reset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, pid_controller.o(i.PID_Reset))
-<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Stop
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
+<P><STRONG><a name="[92]"></a>PID_Reset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, pid_controller.o(i.PID_Reset))
+<BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Stop
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
 </UL>
 
 <P><STRONG><a name="[79]"></a>PID_SetOutputLimits</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, pid_controller.o(i.PID_SetOutputLimits))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = PID_SetOutputLimits &rArr; __aeabi_cfcmple
 </UL>
-<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
+<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
 </UL>
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Init
 </UL>
 
-<P><STRONG><a name="[93]"></a>PID_SetPoint</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, pid_controller.o(i.PID_SetPoint))
-<BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
+<P><STRONG><a name="[94]"></a>PID_SetPoint</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, pid_controller.o(i.PID_SetPoint))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
 </UL>
 
 <P><STRONG><a name="[c]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f10x_it.o(i.PendSV_Handler))
@@ -1232,8 +1233,8 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(.text)
 </UL>
 <P><STRONG><a name="[2b]"></a>TIM3_IRQHandler</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, stm32f10x_it.o(i.TIM3_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 232 + Unknown Stack Size
-<LI>Call Chain = TIM3_IRQHandler &rArr; ANGLE_CONTROL_Process &rArr; ANGLE_CONTROL_ProcessSequence &rArr; ANGLE_CONTROL_SetTarget &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 256 + Unknown Stack Size
+<LI>Call Chain = TIM3_IRQHandler &rArr; ANGLE_CONTROL_Process &rArr; ANGLE_CONTROL_ProcessSequence &rArr; ANGLE_CONTROL_ProcessDualFan &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
@@ -1297,12 +1298,12 @@ Global Symbols
 
 <P><STRONG><a name="[b4]"></a>TIM_SetCompare2</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_SetCompare2))
 <BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_Stop
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetSpeed
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetSpeed
 </UL>
 
 <P><STRONG><a name="[b5]"></a>TIM_SetCompare3</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_SetCompare3))
 <BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_Stop
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetSpeed
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetSpeed
 </UL>
 
 <P><STRONG><a name="[b8]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 122 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_TimeBaseInit))
@@ -1445,7 +1446,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
 </UL>
 
-<P><STRONG><a name="[8f]"></a>__aeabi_d2uiz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfixu.o(x$fpl$dfixu))
+<P><STRONG><a name="[91]"></a>__aeabi_d2uiz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfixu.o(x$fpl$dfixu))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2uiz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessSingleFan
@@ -1455,10 +1456,11 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[98]"></a>__aeabi_cdcmple</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf))
+<P><STRONG><a name="[86]"></a>__aeabi_cdcmple</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_cdcmple
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculatePosition
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_SENSOR_GetAngle
 </UL>
 
@@ -1520,10 +1522,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculatePosition
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessSingleFan
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessSequence
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_SENSOR_GetAngle
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetStableCondition
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetStableCondition
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayStatus
 </UL>
 
@@ -1550,7 +1553,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fcmple
 </UL>
 
-<P><STRONG><a name="[89]"></a>__aeabi_fdiv</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, fdiv.o(x$fpl$fdiv))
+<P><STRONG><a name="[8d]"></a>__aeabi_fdiv</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, fdiv.o(x$fpl$fdiv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_fdiv
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculatePosition
@@ -1564,7 +1567,7 @@ Global Symbols
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_fnaninf
 </UL>
 
-<P><STRONG><a name="[8a]"></a>__aeabi_f2iz</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, ffix.o(x$fpl$ffix))
+<P><STRONG><a name="[8e]"></a>__aeabi_f2iz</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, ffix.o(x$fpl$ffix))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_f2iz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
@@ -1574,13 +1577,13 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_fnaninf
 </UL>
 
-<P><STRONG><a name="[97]"></a>__aeabi_i2f</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$fflt))
+<P><STRONG><a name="[98]"></a>__aeabi_i2f</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$fflt))
 <BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_SENSOR_GetAngle
 </UL>
 
 <P><STRONG><a name="[13f]"></a>_fflt</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$fflt), UNUSED)
 
-<P><STRONG><a name="[87]"></a>__aeabi_ui2f</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$ffltu))
+<P><STRONG><a name="[8b]"></a>__aeabi_ui2f</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$ffltu))
 <BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
 </UL>
 
@@ -1595,7 +1598,7 @@ Global Symbols
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessSingleFan
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_SENSOR_GetAngle
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessKeys
 </UL>
 
@@ -1608,7 +1611,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_frcmple
 </UL>
 
-<P><STRONG><a name="[88]"></a>__aeabi_fmul</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, fmul.o(x$fpl$fmul))
+<P><STRONG><a name="[8c]"></a>__aeabi_fmul</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, fmul.o(x$fpl$fmul))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_fmul
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculatePosition
@@ -1639,12 +1642,13 @@ Global Symbols
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_d2f
 </UL>
 
-<P><STRONG><a name="[92]"></a>__aeabi_cfrcmple</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, frleqf.o(x$fpl$frleqf))
+<P><STRONG><a name="[89]"></a>__aeabi_cfrcmple</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, frleqf.o(x$fpl$frleqf))
 <BR><BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculatePosition
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculateIncremental
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_SetOutputLimits
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_SENSOR_GetAngle
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessKeys
 </UL>
 
@@ -1667,6 +1671,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculatePosition
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_CalculateIncremental
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DisplayStatus
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessKeys
@@ -1706,9 +1711,9 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 208 + Unknown Stack Size
 <LI>Call Chain = ConfigureControlMode &rArr; ANGLE_CONTROL_SetStableCondition &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetStableCondition
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetStableCondition
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ConfigSequence
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
@@ -1725,11 +1730,11 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_Scan
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Stop
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Stop
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_GetTime
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ConfigureControlMode
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
@@ -1815,29 +1820,35 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KEY_Scan
 </UL>
 
-<P><STRONG><a name="[80]"></a>ANGLE_CONTROL_ProcessDualFan</STRONG> (Thumb, 136 bytes, Stack size 48 bytes, angle_control.o(i.ANGLE_CONTROL_ProcessDualFan))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = ANGLE_CONTROL_ProcessDualFan &rArr; PID_Calculate &rArr; PID_CalculatePosition &rArr; __aeabi_cdcmple
+<P><STRONG><a name="[80]"></a>ANGLE_CONTROL_ProcessDualFan</STRONG> (Thumb, 378 bytes, Stack size 48 bytes, angle_control.o(i.ANGLE_CONTROL_ProcessDualFan))
+<BR><BR>[Stack]<UL><LI>Max Depth = 184 + Unknown Stack Size
+<LI>Call Chain = ANGLE_CONTROL_ProcessDualFan &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetSpeed
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetDirection
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetSpeed
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetDirection
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
 </UL>
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessSequence
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
 </UL>
 
 <P><STRONG><a name="[81]"></a>ANGLE_CONTROL_ProcessSequence</STRONG> (Thumb, 210 bytes, Stack size 40 bytes, angle_control.o(i.ANGLE_CONTROL_ProcessSequence))
-<BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
-<LI>Call Chain = ANGLE_CONTROL_ProcessSequence &rArr; ANGLE_CONTROL_SetTarget &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 224 + Unknown Stack Size
+<LI>Call Chain = ANGLE_CONTROL_ProcessSequence &rArr; ANGLE_CONTROL_ProcessDualFan &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_ProcessDualFan
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetTarget
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_SetMode
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
@@ -1848,12 +1859,12 @@ Local Symbols
 <LI>Call Chain = ANGLE_CONTROL_ProcessSingleFan &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetSpeed
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetDirection
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetSpeed
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FAN_SetDirection
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ANGLE_CONTROL_Process
 </UL>
@@ -1865,31 +1876,31 @@ Local Symbols
 <P><STRONG><a name="[d0]"></a>PID_CalculateIncremental</STRONG> (Thumb, 158 bytes, Stack size 48 bytes, pid_controller.o(i.PID_CalculateIncremental))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = PID_CalculateIncremental &rArr; __aeabi_fmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_frsub
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
+<BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
 </UL>
 
 <P><STRONG><a name="[cf]"></a>PID_CalculatePosition</STRONG> (Thumb, 426 bytes, Stack size 56 bytes, pid_controller.o(i.PID_CalculatePosition))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = PID_CalculatePosition &rArr; __aeabi_cdcmple
 </UL>
-<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_frsub
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
 </UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
+<BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
 </UL>
 
 <P><STRONG><a name="[fb]"></a>_dadd1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)

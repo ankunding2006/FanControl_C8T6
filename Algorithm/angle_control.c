@@ -295,6 +295,42 @@ static void ANGLE_CONTROL_ProcessDualFan(AngleControl_TypeDef *control)
     int16_t left_raw;
     int16_t right_raw;
     uint8_t left_speed, right_speed;
+    /**************90度特殊处理*********** */
+     // 90度特殊处理 - 新增代码
+    if (fabs(g_targetAngle - 90.0f) < 1.0f) {
+        // 当目标角度为90度(±1度误差)时的特殊处理
+        float error = control->target_angle - control->current_angle;
+        
+        if (fabs(error) < 3.0f) {
+            // 在误差小于3度时采用平衡控制策略
+            // 两风扇使用相同的中等速度，达到平衡
+            FAN_SetSpeed(FAN_LEFT, 30);
+            FAN_SetSpeed(FAN_RIGHT, 30);
+            FAN_SetDirection(FAN_LEFT, FAN_DIR_FORWARD);
+            FAN_SetDirection(FAN_RIGHT, FAN_DIR_FORWARD);
+            printf("90-degree special mode: L=30, R=30, Err=%.1f\r\n", error);
+            return; // 直接返回，跳过正常的PID计算
+        }
+        else if (error > 0) {
+            // 当前角度小于90度，需要增强右风扇
+            FAN_SetSpeed(FAN_LEFT, 15);
+            FAN_SetSpeed(FAN_RIGHT, 45);
+            FAN_SetDirection(FAN_LEFT, FAN_DIR_FORWARD);
+            FAN_SetDirection(FAN_RIGHT, FAN_DIR_FORWARD);
+            printf("90-degree special mode: L=15, R=45, Err=%.1f\r\n", error);
+            return;
+        }
+        else {
+            // 当前角度大于90度，需要增强左风扇
+            FAN_SetSpeed(FAN_LEFT, 45);
+            FAN_SetSpeed(FAN_RIGHT, 15); 
+            FAN_SetDirection(FAN_LEFT, FAN_DIR_FORWARD);
+            FAN_SetDirection(FAN_RIGHT, FAN_DIR_FORWARD);
+            printf("90-degree special mode: L=45, R=15, Err=%.1f\r\n", error);
+            return;
+        }
+    }
+
 
     /* 计算PID输出 */
     pid_output = PID_Calculate(&control->pid, control->current_angle);
