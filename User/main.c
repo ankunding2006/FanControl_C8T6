@@ -79,7 +79,7 @@ static void System_Init(void)
     ANGLE_CONTROL_Init(&g_angle_control, CONTROL_MODE_IDLE);
 
     // PID参数初始化 - 为角度控制器配置适当的参数
-    PID_Init(&(g_angle_control.pid), 2.3f, 0.02f, 0.00f, PID_MODE_INCREMENTAL, 0.01f);
+    PID_Init(&(g_angle_control.pid), 3.9f, 0.02f, 0.00f, PID_MODE_INCREMENTAL, 0.01f);
 
     // 初始化定时器
     Timer_Init();

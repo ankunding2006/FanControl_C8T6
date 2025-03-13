@@ -16,11 +16,11 @@ uint8_t speed;
 #define DEFAULT_KP 10.0f           // 默认比例系数
 #define DEFAULT_KI 0.5f            // 默认积分系数
 #define DEFAULT_KD 1.0f            // 默认微分系数
-#define DEFAULT_ALLOWED_ERROR 5.0f // 默认允许误差 ±5°
-#define DEFAULT_STABLE_TIME 3000   // 默认稳定时间 3秒
+#define DEFAULT_ALLOWED_ERROR 8.5f // 默认允许误差 ±8.5°
+#define DEFAULT_STABLE_TIME 2000   // 默认稳定时间 2秒
 
 #define DEFAULT_FAN_BASE_SPEED 50  // 默认风扇基础速度 50%
-#define DEFAULT_DUAL_MODE_RATIO 30 // 默认双风扇差速比例 30%
+#define DEFAULT_DUAL_MODE_RATIO 44 // 默认双风扇差速比例 30%
 
 #define ANGLE_CONTROL_INTERVAL 10 // 控制循环间隔(ms)
 
@@ -290,51 +290,51 @@ static void ANGLE_CONTROL_ProcessSingleFan(AngleControl_TypeDef *control)
 static void ANGLE_CONTROL_ProcessDualFan(AngleControl_TypeDef *control)
 {
     float pid_output;
-    int16_t base_speed;
-    float delta;
-    int16_t left_raw;
-    int16_t right_raw;
-    uint8_t left_speed, right_speed;
 
     /* 计算PID输出 */
     pid_output = PID_Calculate(&control->pid, control->current_angle);
 
     /*
-     * 双风扇控制逻辑：
-     * 1. 基础速度为两个风扇的基本速度
-     * 2. PID输出作为差速调整量
-     * 3. 当需要板子顺时针转动(pid_output > 0)时，增加右风扇速度，减少左风扇速度
-     * 4. 当需要板子逆时针转动(pid_output < 0)时，增加左风扇速度，减少右风扇速度
+     * 修改为类似单风扇控制逻辑:
+     * 1. 当目标角度小于90度时(右侧)，使用左风扇推向右侧
+     * 2. 当目标角度大于90度时(左侧)，使用右风扇推向左侧
      */
 
-    /* 基础速度 */
-    base_speed = control->fan_base_speed;
+    /* 根据目标角度决定使用哪个风扇 */
+    if (control->target_angle < 90.0f)
+    {
+        /* 目标角度在右侧，使用左风扇 */
+        speed = (uint8_t)(fabs(pid_output));
+        if (speed > 100)
+            speed = 100;
 
-    /* 差速计算 */
-    delta = pid_output * control->dual_mode_ratio / 100.0f;
+        FAN_SetSpeed(FAN_LEFT, speed);
+        FAN_SetSpeed(FAN_RIGHT, 0);
 
-    /* 计算左右风扇速度 */
-    left_raw = base_speed - (int16_t)delta;
-    right_raw = base_speed + (int16_t)delta;
+        /* 设置风扇方向 */
+        FAN_SetDirection(FAN_LEFT, FAN_DIR_FORWARD);
+        printf("DualMode: left speed:%d, right speed:0\r\n", speed);
+    }
+    //90度的处理
+    else if (control->target_angle == 90.0f)
+    {
+        //关闭所有风扇
+        FAN_StopAll();
+    }
+    else
+    {
+        /* 目标角度在左侧，使用右风扇 */
+        speed = (uint8_t)(fabs(pid_output));
+        if (speed > 100)
+            speed = 100;
 
-    /* 限制速度范围 */
-    if (left_raw < 0)
-        left_raw = 0;
-    if (left_raw > 100)
-        left_raw = 100;
-    if (right_raw < 0)
-        right_raw = 0;
-    if (right_raw > 100)
-        right_raw = 100;
+        FAN_SetSpeed(FAN_RIGHT, speed);
+        FAN_SetSpeed(FAN_LEFT, 0);
 
-    left_speed = (uint8_t)left_raw;
-    right_speed = (uint8_t)right_raw;
-
-    /* 设置风扇速度和方向 */
-    FAN_SetSpeed(FAN_LEFT, left_speed);
-    FAN_SetSpeed(FAN_RIGHT, right_speed);
-    FAN_SetDirection(FAN_LEFT, FAN_DIR_FORWARD);
-    FAN_SetDirection(FAN_RIGHT, FAN_DIR_FORWARD);
+        /* 设置风扇方向 */
+        FAN_SetDirection(FAN_RIGHT, FAN_DIR_FORWARD);
+        printf("DualMode: left speed:0, right speed:%d\r\n", speed);
+    }
 }
 
 /**
@@ -398,7 +398,7 @@ static void ANGLE_CONTROL_ProcessSequence(AngleControl_TypeDef *control)
         printf("Angle %.1f degrees stable, holding for %d seconds\r\n", current_target, hold_time);
     }
 
-    /* 使用双风扇控制模式处理角度 */
+    /* 使用单风扇控制逻辑处理角度 */
     ANGLE_CONTROL_ProcessDualFan(control);
 }
 
